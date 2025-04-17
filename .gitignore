@@ -1,0 +1,53 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# macOS artifacts
+.DS_Store
+
+# Logs and temporary files
+*.log
+*.bak
+*.swp
+*.tmp
+*.out
+
+# System files
+Thumbs.db
+ehthumbs.db
+Icon?
+.idea/
+.vscode/
+
+# Compiled LaTeX files
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.synctex.gz
+*.pdf
+
+# Output builds or captures
+captures/
+build/
+dist/
+*.pcap
+
+# Secret or environment-specific files
+*.env
+.env.*
+secrets.json
+
+# Auto-generated metadata
+*.sqlite
+*.db
+
+# Git
+.git/
