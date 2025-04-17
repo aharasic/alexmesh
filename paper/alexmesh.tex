@@ -1,0 +1,91 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{titlesec}
+\usepackage{enumitem}
+
+\titleformat{\section}[block]{\large\bfseries}{\thesection}{1em}{}
+
+\title{AlexMesh Protocol v1.0 \\ \large A Modern Layer 3 Alternative for Local and Decentralized Networking}
+\author{Alex Harasic}
+\date{April 2025}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+AlexMesh is a novel Layer 3 protocol built entirely over Ethernet (Layer 2), designed for local, decentralized networks without requiring IP addressing, routers, or traditional TCP/UDP stacks. It introduces a self-contained, plug-and-play communication framework where nodes discover, route, and confirm delivery autonomously. This document argues the relevance, advantages, and unique value proposition of AlexMesh compared to the ubiquitous Internet Protocol (IP).
+\end{abstract}
+
+\section{Introduction}
+The Internet Protocol (IP), despite its global dominance, was not designed for modern mesh or ad hoc networks. Its rigid structure, hierarchical addressing, dependency on centralized routers and configuration, and its general overhead make it inefficient or unnecessarily complex in many edge environments --- such as IoT networks, private LANs, or secure isolated systems.
+
+AlexMesh emerges as an alternative for those specific scenarios. By operating over Ethernet and bypassing IP entirely, AlexMesh enables a flexible, secure, and low-latency communication layer that is optimized for discovery, routing, and message exchange in local domains.
+
+\section{Design Goals and Architecture}
+
+\subsection{Goals}
+\begin{itemize}[noitemsep]
+  \item Zero configuration
+  \item Fully decentralized peer-to-peer messaging
+  \item Resilience to partial network partitions
+  \item Stateless message routing with TTL
+  \item Built-in delivery acknowledgment (ACK)
+\end{itemize}
+
+\subsection{Architecture Overview}
+AlexMesh operates over Ethernet by defining a custom EtherType (\texttt{0x88B5}). Each message encapsulates:
+\begin{itemize}[noitemsep]
+  \item Source Node ID (6-byte MAC)
+  \item Destination Node ID (6-byte MAC)
+  \item Message Type (handshake, data, ACK, etc.)
+  \item TTL (Time to live)
+  \item Unique Message ID
+  \item Payload
+\end{itemize}
+
+The protocol uses broadcast for discovery and supports store-and-forward logic for routing messages across non-adjacent nodes. All nodes are equal --- there are no designated routers.
+
+\section{Comparison to IP}
+
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Feature} & \textbf{IP (v4/v6)} & \textbf{AlexMesh} \\
+\hline
+Addressing & Requires static or DHCP & Self-derived from MAC \\
+Routing & Centralized (routers) & Distributed, mesh-based \\
+Setup/Discovery & Requires config & Plug \\& play, broadcast handshake \\
+Message Reliability & TCP or custom logic & Built-in ACK \\
+Network Scope & Global + Local & Local only (LAN) \\
+Protocol Overhead & High (IP+TCP headers) & Low (Ethernet + minimal) \\
+Suitability for Mesh & Poor & Excellent \\
+NAT/Firewall Issues & Common & None (layer 2 only) \\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Use Cases}
+\begin{itemize}[noitemsep]
+  \item IoT networks where IP is overkill or unavailable
+  \item Environments with isolated or air-gapped LANs
+  \item Temporary or mobile mesh networks (e.g. disaster zones, military comms)
+  \item Home automation systems requiring local-only secure comms
+  \item Teaching and experimentation with Layer 2/3 concepts
+\end{itemize}
+
+\section{Limitations}
+\begin{itemize}[noitemsep]
+  \item No compatibility with IP-based internet traffic
+  \item Not suited for wide-area or global-scale networks
+  \item Security features such as encryption are not included in v1.0
+  \item Requires raw socket access (root privileges)
+\end{itemize}
+
+\section{Conclusion}
+AlexMesh rethinks what it means to communicate on a network. By discarding IP, it removes unnecessary layers for local and edge communication, offering a lean, direct, and robust solution for a modern class of decentralized, self-organizing systems. As IP continues to dominate the global internet, protocols like AlexMesh may be better suited to the intelligent, private, and local networks of the future.
+
+\end{document}
